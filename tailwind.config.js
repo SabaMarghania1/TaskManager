@@ -15,7 +15,9 @@ export default {
           xl: "6rem",
         },
       },
-      colors: {},
+      colors: {
+        "blue-circle": "rgba(5, 0, 255, 0.45)",
+      },
     },
   },
   plugins: [],
