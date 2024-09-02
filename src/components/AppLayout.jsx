@@ -19,14 +19,14 @@ const AppLayout = ({ isAuthenticated }) => {
   }, [isAuthenticated, navigate]);
 
   return (
-    <div className=" grid grid-cols-1 grid-rows-[60px_1fr] ">
-      <Header toggleSidebar={toggleSidebar} />
+    <div className="grid grid-cols-1 grid-rows-[60px_1fr] md:grid-cols-[200px_1fr] lg:grid-rows-[68px 1fr] h-screen w-full">
       <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+
+      <Header toggleSidebar={toggleSidebar} />
+
       <Outlet />
     </div>
   );
 };
-{
-}
 
 export default AppLayout;
