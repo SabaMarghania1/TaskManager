@@ -1,5 +1,5 @@
 const Important = () => {
-  return <div>Important</div>;
+  return <div className="container">Important</div>;
 };
 
 export default Important;

@@ -30,7 +30,7 @@ export default function Login() {
         <Link
           to="/AppLayout"
           role="button"
-          className="w-full bg-[#477EE7] p-4 text-center rounded-[30px] font-bold text-white "
+          className="w-full bg-[#477EE7] p-4 text-center rounded-[30px] font-bold text-white"
         >
           Sign In
         </Link>
@@ -40,7 +40,7 @@ export default function Login() {
           <hr className="flex-grow border-t border-gray-300" />
         </div>
         <Link
-          to="/AppLayout"
+          to="/"
           role="button"
           className="w-full p-4 text-center rounded-[30px] font-normal text-[#252931] border border-[#CFD3D9] border-solid flex justify-center gap-3 items-center mb-8"
         >
