@@ -19,7 +19,7 @@ const AppLayout = ({ isAuthenticated }) => {
   }, [isAuthenticated, navigate]);
 
   return (
-    <div className="grid grid-cols-1 grid-rows-[60px_1fr] md:grid-cols-[200px_1fr] lg:grid-rows-[68px 1fr] h-screen w-full">
+    <div className="grid grid-cols-1  grid-rows-[60px_1fr] md:grid-cols-[290px_auto] lg:grid-rows-[68px 1fr] h-screen ">
       <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
 
       <Header toggleSidebar={toggleSidebar} />

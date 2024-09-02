@@ -3,6 +3,7 @@ import AppLayout from "./components/AppLayout";
 import MyDay from "./screens/MyDay";
 import Important from "./screens/Important";
 import Login from "./screens/Login";
+import Dashboard from "./screens/Dashboard";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
       {
         path: "/important",
         element: <Important />,
+      },
+      {
+        path: "/dashboard",
+        element: <Dashboard />,
       },
     ],
   },

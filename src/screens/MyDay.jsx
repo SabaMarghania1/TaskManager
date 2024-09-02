@@ -1,5 +1,5 @@
 const MyDay = () => {
-  return <div className="container lg:col-start-2 row-start-2">My Day</div>;
+  return <div className="px-4 lg:px-8 md:col-start-2 row-start-2 ">My Day</div>;
 };
 
 export default MyDay;
