@@ -18,13 +18,7 @@ export const defaultSubtitles = [
   "Urgent: Client Meeting Tomorrow",
 ];
 
-export const defaultTags = [
-  "Design",
-  "Development",
-  "Research",
-  "Planning",
-  "Review",
-];
+export const defaultTags = ["Design", "Research", "Planning", "Review"];
 
 export const defaultContent = [
   "This is the first line of the default content.",
@@ -64,5 +58,10 @@ export const getRandomGradient = () => {
 export const getRandomProgressBar = () => {
   const totalCircles = Math.floor(Math.random() * 25);
   const activeCircles = getRandomNumber(1, totalCircles);
+  console.log(
+    Array.from({ length: totalCircles }, (_, i) => i < activeCircles)
+  );
   return Array.from({ length: totalCircles }, (_, i) => i < activeCircles);
 };
+
+getRandomProgressBar();

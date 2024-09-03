@@ -4,10 +4,15 @@ import MyDay from "./screens/MyDay";
 import Important from "./screens/Important";
 import Login from "./screens/Login";
 import Dashboard from "./screens/Dashboard";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
-    element: <AppLayout isAuthenticated={false} />,
+    element: (
+      <ProtectedRoute>
+        <AppLayout />
+      </ProtectedRoute>
+    ),
     children: [
       {
         path: "/",

@@ -20,12 +20,11 @@ const Card = ({
 }) => {
   const randomHeight = `${getRandomHeight()}px`;
   const randomWidth = `${getRandomWidth()}px`;
-
   const progressBar = getRandomProgressBar();
 
   return (
     <div
-      className={`p-4 m-2 rounded-lg shadow-lg overflow-hidden ${gradientClass}`}
+      className={`p-4 m-2 rounded-lg shadow-lg hidden lg:block overflow-hidden ${gradientClass}`}
       style={{
         height: randomHeight,
         width: randomWidth,
