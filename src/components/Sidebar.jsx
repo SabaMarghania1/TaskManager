@@ -5,7 +5,7 @@ import { MdOutlineSpaceDashboard } from "react-icons/md";
 export default function Sidebar({ isOpen, toggleSidebar }) {
   return (
     <aside
-      className={`fixed  top-0 left-0 h-full w-8/12 md:w-[290px] bg-[#F6F6F7] border-r-[1px] border-solid border-[#c7CaD0] text-black transform ${
+      className={`fixed z-50 top-0 left-0 h-full w-8/12 md:w-[290px] bg-[#F6F6F7] border-r-[1px] border-solid border-[#c7CaD0] text-black transform ${
         isOpen ? "translate-x-0" : "-translate-x-full"
       } transition-transform duration-300 ease-in-out md:translate-x-0`}
     >

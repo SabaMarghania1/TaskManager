@@ -1,5 +1,22 @@
+import { useAuth } from "@clerk/clerk-react";
+import TaskInput from "../components/TaskInput";
+import Task from "../components/Task";
+import TasksContainer from "../components/TasksContainer";
+
 const MyDay = () => {
-  return <div className="px-4 lg:px-8 md:col-start-2 row-start-2 ">My Day</div>;
+  const { userId } = useAuth();
+  return (
+    <div className="flex flex-col gap-14 px-4 lg:px-8 col-start-2 row-start-2 mt-8">
+      <TaskInput />
+      <TasksContainer>
+        <Task />
+        <Task />
+        <Task />
+        <Task />
+        <Task />
+      </TasksContainer>
+    </div>
+  );
 };
 
 export default MyDay;
