@@ -1,6 +1,6 @@
 const TasksContainer = ({ children }) => {
   return (
-    <div className="grid lg:grid-cols-4  gap-6 grid-rows-auto lg:max-w-[1080px] mx-auto  ">
+    <div className="grid lg:grid-cols-3  md:grid-cols-2 gap-6 grid-rows-auto lg:max-w-[1080px] mx-auto mb-20 ">
       {children}
     </div>
   );

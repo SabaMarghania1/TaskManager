@@ -5,7 +5,7 @@ import { AiOutlineDelete } from "react-icons/ai";
 
 const TaskModal = () => {
   return (
-    <div className="absolute -bottom-47 z-10 px-4 py-2 flex flex-col bg-white lg:w-[180px] rounded-lg shadow-custom">
+    <div className="  px-4 py-2 flex flex-col bg-white lg:w-[180px] w-40 rounded-lg shadow-custom">
       <div className="flex gap-3 py-[10px] ">
         <CiStar size={22} />
         Importance
