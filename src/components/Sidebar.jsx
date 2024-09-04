@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { MdOutlineSpaceDashboard } from "react-icons/md";
+import { CiStar } from "react-icons/ci";
 
 export default function Sidebar({ isOpen, toggleSidebar }) {
   return (
@@ -11,6 +12,7 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
     >
       <div className="flex flex-col mt-[101px] ml-6 ">
         <NavLink
+          onClick={toggleSidebar}
           className={({ isActive }) =>
             `p-4 rounded mr-4 flex gap-3 text-black ${
               isActive && "bg-[#E7E8EA]"
@@ -22,6 +24,7 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
           My Day
         </NavLink>
         <NavLink
+          onClick={toggleSidebar}
           className={({ isActive }) =>
             `p-4 rounded mr-4 flex gap-3 text-black ${
               isActive && "bg-[#E7E8EA]"
@@ -29,10 +32,11 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
           }
           to="/important"
         >
-          <img src="/star.svg" alt="sun icon" />
+          <CiStar size={22} />
           Important
         </NavLink>
         <NavLink
+          onClick={toggleSidebar}
           className={({ isActive }) =>
             `p-4 rounded mr-4 flex gap-3 text-black ${
               isActive && "bg-[#E7E8EA]"
