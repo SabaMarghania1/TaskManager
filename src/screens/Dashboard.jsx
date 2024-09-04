@@ -1,4 +1,5 @@
 import React from "react";
+import { supabase } from "../config/supabaseClient";
 
 export default function Dashboard() {
   return (
