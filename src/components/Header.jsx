@@ -19,7 +19,6 @@ export default function Header({ toggleSidebar }) {
           },
         }}
       />
-      {/*  */}
 
       <div className="flex justify-center gap-3 items-center">
         <form>

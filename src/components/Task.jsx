@@ -1,7 +1,15 @@
+import { useDeleteTodo } from "../hooks/useDeleteTodo";
 import TaskModal from "./TaskModal";
 import { useState } from "react";
 const Task = ({ task }) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const deleteTodoMutation = useDeleteTodo();
+
+  const handleDelete = () => {
+    deleteTodoMutation.mutate(task.id);
+    setIsOpen((prev) => !prev);
+  };
 
   return (
     <div className="relative border rounded-lg px-4 pb-16 pt-[58px] w-full  text-sm bg-[#E3EBFC] shadow-lg max-w-full">
@@ -16,7 +24,7 @@ const Task = ({ task }) => {
         <img src="/more.svg" onClick={() => setIsOpen((prev) => !prev)} />
       </div>
       <div className="absolute right-6 z-10  md: top-0 xl:-right-[150px] xl:top-[100%]">
-        {isOpen && <TaskModal />}
+        {isOpen && <TaskModal handleDelete={handleDelete} />}
       </div>
     </div>
   );
