@@ -20,7 +20,7 @@ const fetchTodos = async (userId) => {
 };
 
 export const useFetchTodos = () => {
-  const { userId, getToken } = useAuth();
+  const { userId } = useAuth();
 
   return useQuery({
     queryKey: ["todos", userId],
