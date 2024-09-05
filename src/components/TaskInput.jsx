@@ -3,7 +3,7 @@ import { useInsertTodo } from "../hooks/useInsertTodo";
 import { useUser } from "@clerk/clerk-react";
 
 export default function TaskInput() {
-  const { user: user_id } = useUser();
+  const { user } = useUser();
   const [newTodo, setNewTodo] = useState("");
   const { mutate: insertTodo } = useInsertTodo();
 
@@ -12,7 +12,7 @@ export default function TaskInput() {
 
     if (newTodo) {
       insertTodo({
-        user_id,
+        user_id: user.id,
         description: newTodo,
         complate: false,
         important: false,
