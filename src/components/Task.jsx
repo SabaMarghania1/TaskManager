@@ -4,19 +4,20 @@ import TaskModal from "./TaskModal";
 import { useEffect, useRef, useState } from "react";
 import useEditTodo from "../hooks/useEditTodo";
 import useCompleteTodo from "../hooks/useCompleteTodo";
-import { useUser } from "@clerk/clerk-react";
+import useToggleImportant from "../hooks/useToggleImportant";
 
 const Task = ({ task, isOpen, toggleOpen }) => {
-  const { user } = useUser();
-
   const [isEdit, setIsEdit] = useState(false);
   const [description, setDescription] = useState(task.description);
 
   const deleteTodoMutation = useDeleteTodo();
   const { mutate } = useEditTodo();
   const completeTodoMutation = useCompleteTodo();
+  const toggleImportantMutation = useToggleImportant();
 
   const textareaRef = useRef(null);
+
+  console.log(task);
 
   const handleDelete = () => {
     deleteTodoMutation.mutate(task.id);
@@ -26,9 +27,7 @@ const Task = ({ task, isOpen, toggleOpen }) => {
   const handleComplete = () => {
     completeTodoMutation.mutate({
       id: task.id,
-      userId: user.id,
     });
-    console.log(task);
   };
 
   const handleEdit = () => {
@@ -41,8 +40,16 @@ const Task = ({ task, isOpen, toggleOpen }) => {
     setIsEdit(false);
   };
 
+  const handleToggleImportant = () => {
+    toggleImportantMutation.mutate({
+      id: task.id,
+      important: task.important,
+    });
+    toggleOpen();
+  };
+
   useEffect(() => {
-    if (textareaRef.current) {
+    if (textareaRef.current && isEdit) {
       textareaRef.current.style.height = "auto";
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
     }
@@ -74,17 +81,22 @@ const Task = ({ task, isOpen, toggleOpen }) => {
           Save
         </button>
       )}
+
+      {task.complate && <p className="text-green-500">Completed</p>}
       {!isEdit && (
         <div className="absolute top-4 right-2 xl:top-[85%]">
           <img src="/more.svg" alt="More options" onClick={toggleOpen} />
         </div>
       )}
-      <div className="absolute right-6 z-10 md:top-0 xl:right-[150px] xl:top-[200px]">
+      <div className="absolute right-6 z-10 md:top-0 xl:-right-[150px] xl:top-[240px]">
         {isOpen && (
           <TaskModal
+            task={task}
             handleDelete={handleDelete}
             handleEdit={handleEdit}
             handleComplete={handleComplete}
+            handleToggleImportant={handleToggleImportant}
+            onClose={toggleOpen}
           />
         )}
       </div>

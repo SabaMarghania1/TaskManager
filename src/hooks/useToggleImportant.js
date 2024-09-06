@@ -1,10 +1,10 @@
 import { supabase } from "../config/supabaseClient";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-const completeTodo = async ({ id }) => {
+const toggleImportant = async ({ id, important }) => {
   const { data, error } = await supabase
     .from("todos")
-    .update({ complate: true })
+    .update({ important: !important })
     .eq("id", id)
     .single();
 
@@ -15,16 +15,16 @@ const completeTodo = async ({ id }) => {
   return data;
 };
 
-const useCompleteTodo = () => {
+const useToggleImportant = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: completeTodo,
-    mutationKey: ["complete-todo"],
+    mutationFn: toggleImportant,
+    mutationKey: ["toggle-important"],
     onSuccess: () => {
       queryClient.invalidateQueries("todos");
     },
   });
 };
 
-export default useCompleteTodo;
+export default useToggleImportant;
