@@ -4,25 +4,24 @@ import Task from "../components/Task";
 import TasksContainer from "../components/TasksContainer";
 import { useFetchTodos } from "../hooks/useFetchTodos";
 import Loader from "../components/Loader";
-import { useState } from "react";
+import { useOutletContext } from "react-router-dom";
 
-const MyDay = () => {
+const MyDay = ({}) => {
+  const { openTaskId, toggleOpen } = useOutletContext();
   const { user, isLoaded } = useUser();
-  const [openTaskId, setOpenTaskId] = useState(null);
-  const toggleOpen = (taskId) => {
-    setOpenTaskId((prevId) => (prevId === taskId ? null : taskId));
-  };
 
   const { data: todos, isPending, error } = useFetchTodos(user.id, isLoaded);
 
   if (isPending) return <Loader />;
   if (error) return <p>Error fetching todos: {error.message}</p>;
 
+  const formattedTodos = todos.filter((item) => !item.important);
+
   return (
-    <div className="flex flex-col gap-14 px-4 lg:px-8 col-start-1 md:col-start-2 row-start-2 mt-8 w-full ">
+    <div className="flex flex-col gap-14 px-4 lg:px-8 col-start-1 md:col-start-2 row-start-2 mt-8 w-full h-full ">
       <TaskInput />
       <TasksContainer>
-        {todos.map((todo) => (
+        {formattedTodos.map((todo) => (
           <Task
             key={todo.id}
             task={todo}

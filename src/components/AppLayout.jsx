@@ -5,6 +5,11 @@ import Header from "./Header";
 
 const AppLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [openTaskId, setOpenTaskId] = useState(null);
+
+  const toggleOpen = (taskId) => {
+    setOpenTaskId((prevId) => (prevId === taskId ? null : taskId));
+  };
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -16,7 +21,7 @@ const AppLayout = () => {
 
       <Header toggleSidebar={toggleSidebar} />
 
-      <Outlet />
+      <Outlet context={{ openTaskId, toggleOpen }} />
     </div>
   );
 };

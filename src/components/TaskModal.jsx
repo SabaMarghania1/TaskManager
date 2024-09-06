@@ -8,7 +8,7 @@ const TaskModal = ({
   handleDelete,
   handleEdit,
   handleComplete,
-  handleToggleImportant, // Accept the toggle importance function
+  handleToggleImportant,
   task,
   onClose,
 }) => {
@@ -19,7 +19,7 @@ const TaskModal = ({
   return (
     <div
       ref={modalRef}
-      className="px-4 py-2 flex flex-col bg-white lg:w-[180px] w-40 rounded-lg shadow-custom"
+      className="absolute px-4 py-2 flex flex-col  bg-white lg:w-[180px] w-40 rounded-lg shadow-custom"
     >
       <div
         className="flex gap-3 py-[10px] cursor-pointer"

@@ -69,7 +69,7 @@ const Task = ({ task, isOpen, toggleOpen }) => {
         cols={24}
         readOnly={!isEdit}
         value={description}
-        className="bg-transparent border-none outline-none resize-none overflow-hidden w-full h-auto min-h-[100px] px-2 py-1 rounded-md"
+        className="bg-transparent border-none outline-none resize-none overflow-hidden w-full h-auto  px-2 py-1 rounded-md"
         ref={textareaRef}
         onChange={(e) => setDescription(e.target.value)}
       />
