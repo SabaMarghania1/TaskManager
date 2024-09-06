@@ -3,25 +3,37 @@ import { useDeleteTodo } from "../hooks/useDeleteTodo";
 import TaskModal from "./TaskModal";
 import { useEffect, useRef, useState } from "react";
 import useEditTodo from "../hooks/useEditTodo";
+import useCompleteTodo from "../hooks/useCompleteTodo";
+import { useUser } from "@clerk/clerk-react";
 
-const Task = ({ task }) => {
-  const [isOpen, setIsOpen] = useState(false);
+const Task = ({ task, isOpen, toggleOpen }) => {
+  const { user } = useUser();
+
   const [isEdit, setIsEdit] = useState(false);
   const [description, setDescription] = useState(task.description);
 
   const deleteTodoMutation = useDeleteTodo();
   const { mutate } = useEditTodo();
+  const completeTodoMutation = useCompleteTodo();
 
   const textareaRef = useRef(null);
 
   const handleDelete = () => {
     deleteTodoMutation.mutate(task.id);
-    setIsOpen(false);
+    toggleOpen();
+  };
+
+  const handleComplete = () => {
+    completeTodoMutation.mutate({
+      id: task.id,
+      userId: user.id,
+    });
+    console.log(task);
   };
 
   const handleEdit = () => {
     setIsEdit(true);
-    setIsOpen(false);
+    toggleOpen();
   };
 
   const handleSaveEdit = () => {
@@ -64,17 +76,16 @@ const Task = ({ task }) => {
       )}
       {!isEdit && (
         <div className="absolute top-4 right-2 xl:top-[85%]">
-          <img
-            src="/more.svg"
-            alt="More options"
-            onClick={() => setIsOpen((prev) => !prev)}
-          />
+          <img src="/more.svg" alt="More options" onClick={toggleOpen} />
         </div>
       )}
-
       <div className="absolute right-6 z-10 md:top-0 xl:right-[150px] xl:top-[200px]">
         {isOpen && (
-          <TaskModal handleDelete={handleDelete} handleEdit={handleEdit} />
+          <TaskModal
+            handleDelete={handleDelete}
+            handleEdit={handleEdit}
+            handleComplete={handleComplete}
+          />
         )}
       </div>
     </div>

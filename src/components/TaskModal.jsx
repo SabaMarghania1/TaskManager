@@ -3,14 +3,14 @@ import { CiStar, CiEdit } from "react-icons/ci";
 import { FaRegCircle } from "react-icons/fa";
 import { AiOutlineDelete } from "react-icons/ai";
 
-const TaskModal = ({ handleDelete, handleEdit }) => {
+const TaskModal = ({ handleDelete, handleEdit, handleComplete }) => {
   return (
     <div className="px-4 py-2 flex flex-col bg-white lg:w-[180px] w-40 rounded-lg shadow-custom">
       <div className="flex gap-3 py-[10px] ">
         <CiStar size={22} />
         Importance
       </div>
-      <div className="flex gap-3 py-[10px] ">
+      <div className="flex gap-3 py-[10px]" onClick={handleComplete}>
         <FaRegCircle size={22} />
         Complete
       </div>
