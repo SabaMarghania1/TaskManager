@@ -1,10 +1,10 @@
-import { SignIn } from "@clerk/clerk-react";
-import Card from "../Card";
+import React from "react";
+import SignInForm from "../components/SignInForm";
+import Pattern from "../components/DesktopLoginPattern";
+import { useMediaQuery } from "react-responsive";
 
-export default function Login() {
-  return (
-    <div className="flex justify-center items-center h-screen  ">
-      <SignIn signUpUrl="/register" />
-    </div>
-  );
-}
+const SignIn = () => {
+  return <SignInForm />;
+};
+
+export default SignIn;
