@@ -6,7 +6,7 @@ import { useFetchTodos } from "../hooks/useFetchTodos";
 import Loader from "../components/Loader";
 import { useOutletContext } from "react-router-dom";
 
-const MyDay = ({}) => {
+const MyDay = () => {
   const { openTaskId, toggleOpen } = useOutletContext();
   const { user, isLoaded } = useUser();
 

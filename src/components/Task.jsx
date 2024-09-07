@@ -17,7 +17,22 @@ const Task = ({ task, isOpen, toggleOpen }) => {
 
   const textareaRef = useRef(null);
 
-  console.log(task);
+  const adjustTextareaHeight = () => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "auto";
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+    }
+  };
+
+  useEffect(() => {
+    if (isEdit) {
+      adjustTextareaHeight();
+    }
+  }, [isEdit, description]);
+
+  useEffect(() => {
+    adjustTextareaHeight();
+  }, []);
 
   const handleDelete = () => {
     deleteTodoMutation.mutate(task.id);
@@ -36,7 +51,7 @@ const Task = ({ task, isOpen, toggleOpen }) => {
   };
 
   const handleSaveEdit = () => {
-    mutate({ id: task.id, description });
+    mutate({ id: task.id, newDescription: description });
     setIsEdit(false);
   };
 
@@ -48,17 +63,10 @@ const Task = ({ task, isOpen, toggleOpen }) => {
     toggleOpen();
   };
 
-  useEffect(() => {
-    if (textareaRef.current && isEdit) {
-      textareaRef.current.style.height = "auto";
-      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
-    }
-  }, [description]);
-
   const formattedDate = format(new Date(task.created_at), "MM/dd/yyyy");
 
   return (
-    <div className="relative border rounded-lg px-4 pb-16 pt-[58px]  text-sm bg-[#E3EBFC] shadow-lg w-[243px] xl-[252px]">
+    <div className="break-inside-avoid relative border rounded-lg px-4 pb-16 pt-[58px] text-sm bg-[#E3EBFC] shadow-lg mb-4 max-w-[253px]">
       <div className="absolute top-4 left-4 rounded-[30px] bg-[#f1f5fe] py-1 px-3 flex items-center">
         <p className="text-sm text-gray-500 flex items-center gap-2">
           <img src="/calendar.svg" alt="Calendar icon" />
@@ -69,7 +77,7 @@ const Task = ({ task, isOpen, toggleOpen }) => {
         cols={24}
         readOnly={!isEdit}
         value={description}
-        className="bg-transparent border-none outline-none resize-none overflow-hidden w-full h-auto  px-2 py-1 rounded-md"
+        className={`bg-transparent border-none outline-none resize-none break-words overflow-hidden w-full h-auto px-2 py-1 rounded-md`}
         ref={textareaRef}
         onChange={(e) => setDescription(e.target.value)}
       />
@@ -82,24 +90,22 @@ const Task = ({ task, isOpen, toggleOpen }) => {
         </button>
       )}
 
-      {task.complate && <p className="text-green-500">Completed</p>}
+      {task.complate && <p className="text-green-500">Complete</p>}
       {!isEdit && (
         <div className="absolute top-4 right-2 xl:top-[85%]">
           <img src="/more.svg" alt="More options" onClick={toggleOpen} />
         </div>
       )}
-      <div className="absolute right-6 z-10 md:top-0 xl:-right-[150px] xl:top-[240px]">
-        {isOpen && (
-          <TaskModal
-            task={task}
-            handleDelete={handleDelete}
-            handleEdit={handleEdit}
-            handleComplete={handleComplete}
-            handleToggleImportant={handleToggleImportant}
-            onClose={toggleOpen}
-          />
-        )}
-      </div>
+      {isOpen && (
+        <TaskModal
+          task={task}
+          handleDelete={handleDelete}
+          handleEdit={handleEdit}
+          handleComplete={handleComplete}
+          handleToggleImportant={handleToggleImportant}
+          onClose={toggleOpen}
+        />
+      )}
     </div>
   );
 };

@@ -1,10 +1,13 @@
+import { useOutletContext } from "react-router-dom";
 import Loader from "../components/Loader";
 import Task from "../components/Task";
 import TasksContainer from "../components/TasksContainer";
 import { useFetchTodos } from "../hooks/useFetchTodos";
 
-const Important = ({ openTaskId, toggleOpen }) => {
+const Important = () => {
   const { data: todos, isPending, error } = useFetchTodos();
+
+  const { openTaskId, toggleOpen } = useOutletContext();
 
   if (isPending) return <Loader />;
   if (error) return <p>Error fetching todos: {error.message}</p>;

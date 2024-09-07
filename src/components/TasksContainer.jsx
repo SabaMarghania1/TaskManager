@@ -1,8 +1,6 @@
-const TasksContainer = ({ cols = 4, classname = "", children }) => {
+const TasksContainer = ({ children }) => {
   return (
-    <div
-      className={`sm:columns-1 md:columns-2 row-auto xl:columns-3 bg-red-500 mx-auto ${classname}`}
-    >
+    <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4  mx-auto">
       {children}
     </div>
   );
