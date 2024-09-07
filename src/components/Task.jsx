@@ -6,7 +6,13 @@ import useEditTodo from "../hooks/useEditTodo";
 import useCompleteTodo from "../hooks/useCompleteTodo";
 import useToggleImportant from "../hooks/useToggleImportant";
 
-const Task = ({ task, isOpen, toggleOpen }) => {
+const Task = ({
+  task,
+  isOpen,
+  toggleOpen,
+  bg = "#E3EBFC",
+  randomBg = false,
+}) => {
   const [isEdit, setIsEdit] = useState(false);
   const [description, setDescription] = useState(task.description);
 
@@ -40,9 +46,7 @@ const Task = ({ task, isOpen, toggleOpen }) => {
   };
 
   const handleComplete = () => {
-    completeTodoMutation.mutate({
-      id: task.id,
-    });
+    completeTodoMutation.mutate({ id: task.id });
   };
 
   const handleEdit = () => {
@@ -65,19 +69,38 @@ const Task = ({ task, isOpen, toggleOpen }) => {
 
   const formattedDate = format(new Date(task.created_at), "MM/dd/yyyy");
 
+  // Define a list of background colors
+  const bgColors = [
+    "#E3EBFC",
+    "#FBF0E4",
+    "#E4F6FC",
+    "#FCE4E4",
+    "#E7E4FC",
+    "#FCE4F5",
+  ];
+
+  const appliedBgColor = randomBg
+    ? bgColors[Math.floor(Math.random() * bgColors.length)]
+    : bg;
+
   return (
-    <div className="break-inside-avoid relative border rounded-lg px-4 pb-16 pt-[58px] text-sm bg-[#E3EBFC] shadow-lg mb-4 max-w-[253px]">
-      <div className="absolute top-4 left-4 rounded-[30px] bg-[#f1f5fe] py-1 px-3 flex items-center">
-        <p className="text-sm text-gray-500 flex items-center gap-2">
-          <img src="/calendar.svg" alt="Calendar icon" />
-          {formattedDate}
-        </p>
-      </div>
+    <div
+      className="break-inside-avoid relative border rounded-lg px-4 pb-16 pt-[58px] text-sm shadow-lg mb-4 max-w-[253px]"
+      style={{ backgroundColor: appliedBgColor }}
+    >
+      {formattedDate && (
+        <div className="absolute top-4 left-4 rounded-[30px] bg-[#f1f5fe] py-1 px-3 flex items-center">
+          <p className="text-sm text-gray-500 flex items-center gap-2">
+            <img src="/calendar.svg" alt="Calendar icon" />
+            {formattedDate}
+          </p>
+        </div>
+      )}
       <textarea
         cols={24}
         readOnly={!isEdit}
         value={description}
-        className={`bg-transparent border-none outline-none resize-none break-words overflow-hidden w-full h-auto px-2 py-1 rounded-md`}
+        className="bg-transparent border-none outline-none resize-none break-words overflow-hidden w-full h-auto px-2 py-1 rounded-md"
         ref={textareaRef}
         onChange={(e) => setDescription(e.target.value)}
       />

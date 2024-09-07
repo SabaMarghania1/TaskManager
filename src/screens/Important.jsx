@@ -14,7 +14,7 @@ const Important = () => {
   const importantTodos = todos.filter((items) => items.important);
 
   return (
-    <div className="px-4 lg:px-8 md:col-start-2 row-start-2">
+    <div className=" flex flex-col gap-y-14 px-4 lg:px-8 col-start-1 md:col-start-2 row-start-2 mt-8">
       <TasksContainer classname="mt-20">
         {importantTodos.map((todo) => (
           <Task

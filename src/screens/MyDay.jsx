@@ -18,7 +18,7 @@ const MyDay = () => {
   const formattedTodos = todos.filter((item) => !item.important);
 
   return (
-    <div className="flex flex-col gap-14 px-4 lg:px-8 col-start-1 md:col-start-2 row-start-2 mt-8 w-full h-full ">
+    <div className="flex flex-col gap-14 px-4 lg:px-8 col-start-1 md:col-start-2 row-start-2 mt-8  ">
       <TaskInput />
       <TasksContainer>
         {formattedTodos.map((todo) => (
@@ -27,6 +27,7 @@ const MyDay = () => {
             task={todo}
             isOpen={openTaskId === todo.id}
             toggleOpen={() => toggleOpen(todo.id)}
+            randomBg={true}
           />
         ))}
       </TasksContainer>
