@@ -5,6 +5,7 @@ import Important from "./screens/Important";
 import Login from "./screens/Login";
 import Dashboard from "./screens/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Register from "./screens/Register";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
   },
 ]);
 
