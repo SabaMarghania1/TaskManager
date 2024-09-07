@@ -1,10 +1,6 @@
 import { format } from "date-fns";
-import { useDeleteTodo } from "../hooks/useDeleteTodo";
 import TaskModal from "./TaskModal";
 import { useEffect, useRef, useState } from "react";
-import useEditTodo from "../hooks/useEditTodo";
-import useCompleteTodo from "../hooks/useCompleteTodo";
-import useToggleImportant from "../hooks/useToggleImportant";
 
 const Task = ({
   task,
@@ -15,11 +11,6 @@ const Task = ({
 }) => {
   const [isEdit, setIsEdit] = useState(false);
   const [description, setDescription] = useState(task.description);
-
-  const deleteTodoMutation = useDeleteTodo();
-  const { mutate } = useEditTodo();
-  const completeTodoMutation = useCompleteTodo();
-  const toggleImportantMutation = useToggleImportant();
 
   const textareaRef = useRef(null);
 
@@ -40,15 +31,6 @@ const Task = ({
     adjustTextareaHeight();
   }, []);
 
-  const handleDelete = () => {
-    deleteTodoMutation.mutate(task.id);
-    toggleOpen();
-  };
-
-  const handleComplete = () => {
-    completeTodoMutation.mutate({ id: task.id });
-  };
-
   const handleEdit = () => {
     setIsEdit(true);
     toggleOpen();
@@ -59,17 +41,8 @@ const Task = ({
     setIsEdit(false);
   };
 
-  const handleToggleImportant = () => {
-    toggleImportantMutation.mutate({
-      id: task.id,
-      important: task.important,
-    });
-    toggleOpen();
-  };
-
   const formattedDate = format(new Date(task.created_at), "MM/dd/yyyy");
 
-  // Define a list of background colors
   const bgColors = [
     "#E3EBFC",
     "#FBF0E4",
@@ -79,9 +52,11 @@ const Task = ({
     "#FCE4F5",
   ];
 
-  const appliedBgColor = randomBg
-    ? bgColors[Math.floor(Math.random() * bgColors.length)]
-    : bg;
+  const [appliedBgColor] = useState(() => {
+    return randomBg
+      ? bgColors[Math.floor(Math.random() * bgColors.length)]
+      : bg;
+  });
 
   return (
     <div
@@ -120,14 +95,7 @@ const Task = ({
         </div>
       )}
       {isOpen && (
-        <TaskModal
-          task={task}
-          handleDelete={handleDelete}
-          handleEdit={handleEdit}
-          handleComplete={handleComplete}
-          handleToggleImportant={handleToggleImportant}
-          onClose={toggleOpen}
-        />
+        <TaskModal task={task} handleEdit={handleEdit} onClose={toggleOpen} />
       )}
     </div>
   );

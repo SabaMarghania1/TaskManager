@@ -2,15 +2,28 @@ import React, { useEffect, useRef } from "react";
 import { CiStar, CiEdit } from "react-icons/ci";
 import { FaRegCircle } from "react-icons/fa";
 import { AiOutlineDelete } from "react-icons/ai";
+import { useTodoMutations } from "../hooks/useTodoMutation";
 
-const TaskModal = ({
-  handleDelete,
-  handleEdit,
-  handleComplete,
-  task,
-  onClose,
-  handleToggleImportant,
-}) => {
+const TaskModal = ({ task, onClose, handleEdit }) => {
+  const {
+    completeTodoMutation,
+    deleteTodoMutation,
+    updateTodoMutation,
+    toggleImportantMutation,
+  } = useTodoMutations();
+
+  const handleComplete = () => {
+    completeTodoMutation.mutate({ id: task.id });
+  };
+
+  const handleDelete = () => {
+    deleteTodoMutation.mutate(task.id);
+  };
+
+  const handleToggleImportant = () => {
+    toggleImportantMutation.mutate({ id: task.id, important: task.important });
+  };
+
   return (
     <div className="absolute right-0 inset-0 bottom-0 lg:bottom-auto z-50">
       <div className="px-4 py-2 bg-white lg:w-[200px] w-[160px] rounded-lg shadow-custom">

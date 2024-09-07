@@ -10,7 +10,8 @@ const fetchTodos = async (userId) => {
   const { data, error } = await supabase
     .from("todos")
     .select("*")
-    .eq("user_id", userId);
+    .eq("user_id", userId)
+    .order("created_at", { ascending: true });
 
   if (error) {
     throw new Error(error.message);

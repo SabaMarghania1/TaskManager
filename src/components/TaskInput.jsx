@@ -1,17 +1,17 @@
 import React, { useState } from "react";
-import { useInsertTodo } from "../hooks/useInsertTodo";
 import { useUser } from "@clerk/clerk-react";
+import { useTodoMutations } from "../hooks/useTodoMutation";
 
 export default function TaskInput() {
   const { user } = useUser();
   const [newTodo, setNewTodo] = useState("");
-  const { mutate: insertTodo } = useInsertTodo();
+  const { insertTodoMutation } = useTodoMutations();
 
   function handleAddTodo(e) {
     e.preventDefault();
 
     if (newTodo) {
-      insertTodo({
+      insertTodoMutation.mutate({
         user_id: user.id,
         description: newTodo,
         complate: false,

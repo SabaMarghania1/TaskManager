@@ -1,9 +1,27 @@
+import React from "react";
 import { SignUp } from "@clerk/clerk-react";
 
-export default function Register() {
+const Register = () => {
   return (
-    <div className="flex justify-center items-center h-screen">
-      <SignUp routing="path" path="/register" signInUrl="/login" />
+    <div>
+      <SignUp
+        path="/register"
+        signInUrl="/login"
+        appearance={{
+          elements: {
+            main: "flex flex-col-reverse",
+            formFieldInput: "h-[38px]",
+            card: "!bg-transparent",
+            headerSubtitle: "hidden",
+            socialButtonsBlockButton__google:
+              "h-[38px] rounded-[30px] !border-[1px] !border-[#CFD3D9] hover:bg-transparent !shadow-none",
+            formButtonPrimary:
+              "bg-[#333] h-[38px] rounded-[30px] hover:bg-[#555] text-sm",
+          },
+        }}
+      />
     </div>
   );
-}
+};
+
+export default Register;
