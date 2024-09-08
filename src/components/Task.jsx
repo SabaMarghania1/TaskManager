@@ -1,7 +1,7 @@
 import { format } from "date-fns";
 import TaskModal from "./TaskModal";
 import { useEffect, useRef, useState } from "react";
-
+import { useTodoMutations } from "../hooks/useTodoMutation";
 const Task = ({
   task,
   isOpen,
@@ -11,6 +11,8 @@ const Task = ({
 }) => {
   const [isEdit, setIsEdit] = useState(false);
   const [description, setDescription] = useState(task.description);
+
+  const { updateTodoMutation } = useTodoMutations();
 
   const textareaRef = useRef(null);
 
@@ -37,7 +39,7 @@ const Task = ({
   };
 
   const handleSaveEdit = () => {
-    mutate({ id: task.id, newDescription: description });
+    updateTodoMutation.mutate({ id: task.id, newDescription: description });
     setIsEdit(false);
   };
 

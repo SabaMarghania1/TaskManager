@@ -1,6 +1,7 @@
 import { UserButton } from "@clerk/clerk-react";
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
+import LanguageSelector from "./LanguageSelector";
 
 export default function Header({ toggleSidebar, searchTerm, setSearchTerm }) {
   const location = useLocation();
@@ -62,7 +63,7 @@ export default function Header({ toggleSidebar, searchTerm, setSearchTerm }) {
 
       <div className="hidden md:flex gap-3 justify-end md:col-start-2">
         <div className="flex items-center gap-2">
-          <span className="text-[#82868F]">EN</span>
+          <LanguageSelector />
           <div className="w-[1px] h-4 bg-[#82868F]"></div>
         </div>
 

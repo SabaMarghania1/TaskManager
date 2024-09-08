@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import { MdOutlineSpaceDashboard } from "react-icons/md";
 import { CiStar } from "react-icons/ci";
+import { useTranslation } from "react-i18next";
 
 export default function Sidebar({ isOpen, toggleSidebar }) {
+  const { t } = useTranslation();
+
   return (
     <aside
       className={`fixed z-50 top-0 left-0 h-full w-8/12 md:w-[290px] bg-[#F6F6F7] border-r-[1px] border-solid border-[#c7CaD0] text-black transform ${
@@ -21,7 +24,7 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
           to="/"
         >
           <img src="/sun.svg" alt="sun icon" />
-          My Day
+          {t("myDay")}
         </NavLink>
         <NavLink
           onClick={toggleSidebar}
@@ -33,7 +36,7 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
           to="/important"
         >
           <CiStar size={22} />
-          Important
+          {t("important")}
         </NavLink>
         <NavLink
           onClick={toggleSidebar}

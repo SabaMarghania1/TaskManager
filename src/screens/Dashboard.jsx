@@ -20,33 +20,27 @@ const Dashboard = () => {
         },
         {
           name: "Completed Tasks",
-          value: todos.filter((task) => task.complete).length,
+          value: todos.filter((task) => task.complate).length, // Keep 'complate'
         },
         {
           name: "Remaining Tasks",
-          value: todos.length - todos.filter((task) => task.complete).length,
+          value: todos.length - todos.filter((task) => task.complate).length, // Keep 'complate'
         },
       ]
     : [];
 
   const chartData = todos
     ? {
-        labels: [
-          "All Todos",
-          "Important Tasks",
-          "Done Tasks",
-          "Remaining Tasks",
-        ],
+        labels: ["Important Tasks", "Done Tasks", "Remaining Tasks"],
         datasets: [
           {
             label: "# of Tasks",
             data: [
-              todos.length,
               todos.filter((task) => task.important).length,
-              todos.filter((task) => task.complate).length,
-              todos.length - todos.filter((task) => task.complate).length,
+              todos.filter((task) => task.complate).length, // Keep 'complate'
+              todos.length - todos.filter((task) => task.complate).length, // Keep 'complate'
             ],
-            backgroundColor: ["#00A9D7", "#FFA400", "#80BC00", "#6E7C7C"],
+            backgroundColor: ["#FFA400", "#80BC00", "#6E7C7C"],
           },
         ],
       }
@@ -64,7 +58,7 @@ const Dashboard = () => {
             {todosData.map((item) => {
               return (
                 <DashboardItem
-                  key={item.text}
+                  key={item.name} // Use item.name as key
                   text={item.name}
                   quantity={item.value}
                 />
@@ -73,7 +67,7 @@ const Dashboard = () => {
           </DashboardItems>
 
           {todos.length === 0 ? (
-            <h1>To See Chart, Simply add todos.</h1>
+            <h1>To see the chart, simply add todos.</h1>
           ) : (
             <PieChart chartData={chartData} isPending={isPending} />
           )}

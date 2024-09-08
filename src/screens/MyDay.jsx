@@ -25,7 +25,7 @@ const MyDay = () => {
     <div className="flex flex-col gap-14 px-4 lg:px-8 col-start-1 md:col-start-2 row-start-2 mt-8">
       <TaskInput />
 
-      <TasksContainer>
+      <TasksContainer cols={4}>
         {formattedTodos.length > 0
           ? formattedTodos.map((todo) => (
               <Task

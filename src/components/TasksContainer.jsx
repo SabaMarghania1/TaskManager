@@ -1,6 +1,10 @@
-const TasksContainer = ({ children }) => {
+const TasksContainer = ({ cols = 3, children }) => {
   return (
-    <div className="relative md:columns-2 xl:columns-4 columns-auto gap-6  mx-auto ">
+    <div
+      className={`relative md:columns-2 ${
+        cols === 4 ? "xl:columns-4" : "xl:columns-3"
+      } columns-auto gap-4 mx-auto`}
+    >
       {children}
     </div>
   );
