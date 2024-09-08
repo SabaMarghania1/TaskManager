@@ -2,11 +2,11 @@ import { UserButton } from "@clerk/clerk-react";
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import LanguageSelector from "./LanguageSelector";
-
+import { useTranslation } from "react-i18next";
 export default function Header({ toggleSidebar, searchTerm, setSearchTerm }) {
   const location = useLocation();
   const [isSearchVisible, setIsSearchVisible] = useState(false);
-
+  const { t } = useTranslation();
   const showSearch = location.pathname === "/";
 
   return (
@@ -28,7 +28,7 @@ export default function Header({ toggleSidebar, searchTerm, setSearchTerm }) {
         >
           <input
             type="text"
-            placeholder="Search a Task"
+            placeholder={t("searchTask")}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="border-[1px] border-[#82868F] px-3 py-2 rounded-md w-full h-full"

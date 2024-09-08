@@ -8,8 +8,6 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Register from "./screens/Register";
 import AuthLayout from "./components/AuthLayout";
 
-import i18n from "./i18n";
-
 const router = createBrowserRouter([
   {
     element: (

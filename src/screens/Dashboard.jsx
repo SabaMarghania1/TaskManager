@@ -1,44 +1,45 @@
-import { useFetchTodos } from "../hooks/useFetchTodos";
 import PieChart from "../components/PieChart";
 import Loader from "../components/Loader";
 import { useOutletContext } from "react-router-dom";
 import DashboardItems from "../components/DashboardItems";
 import DashboardItem from "../components/DashboardItem";
+import { useTranslation } from "react-i18next";
 
 const Dashboard = () => {
   const { todos, isPending, isError } = useOutletContext();
+  const { t } = useTranslation();
 
   const todosData = todos
     ? [
         {
-          name: "All Todos",
+          name: t("allTodos"),
           value: todos.length,
         },
         {
-          name: "Important Tasks",
+          name: t("importantTasks"),
           value: todos.filter((task) => task.important).length,
         },
         {
-          name: "Completed Tasks",
-          value: todos.filter((task) => task.complate).length, // Keep 'complate'
+          name: t("finishedTasks"),
+          value: todos.filter((task) => task.complate).length,
         },
         {
-          name: "Remaining Tasks",
-          value: todos.length - todos.filter((task) => task.complate).length, // Keep 'complate'
+          name: t("remainingTasks"),
+          value: todos.length - todos.filter((task) => task.complate).length,
         },
       ]
     : [];
 
   const chartData = todos
     ? {
-        labels: ["Important Tasks", "Done Tasks", "Remaining Tasks"],
+        labels: [t("importantTasks"), t("finishedTasks"), t("remainingTasks")],
         datasets: [
           {
-            label: "# of Tasks",
+            label: t("dashboard"),
             data: [
               todos.filter((task) => task.important).length,
-              todos.filter((task) => task.complate).length, // Keep 'complate'
-              todos.length - todos.filter((task) => task.complate).length, // Keep 'complate'
+              todos.filter((task) => task.complate).length,
+              todos.length - todos.filter((task) => task.complate).length,
             ],
             backgroundColor: ["#FFA400", "#80BC00", "#6E7C7C"],
           },
@@ -46,7 +47,7 @@ const Dashboard = () => {
       }
     : null;
 
-  if (isError) return <p>Error loading data...</p>;
+  if (isError) return <p>{t("errorLoadingData")}</p>;
 
   return (
     <div className="flex flex-col gap-14 px-4 lg:px-8 col-start-1 md:col-start-2 row-start-2 mt-8">
@@ -58,7 +59,7 @@ const Dashboard = () => {
             {todosData.map((item) => {
               return (
                 <DashboardItem
-                  key={item.name} // Use item.name as key
+                  key={item.name}
                   text={item.name}
                   quantity={item.value}
                 />
@@ -67,7 +68,7 @@ const Dashboard = () => {
           </DashboardItems>
 
           {todos.length === 0 ? (
-            <h1>To see the chart, simply add todos.</h1>
+            <h1>{t("addTodosToSeeChart")}</h1>
           ) : (
             <PieChart chartData={chartData} isPending={isPending} />
           )}

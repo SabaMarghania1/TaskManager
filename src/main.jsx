@@ -4,6 +4,7 @@ import App from "./App";
 import { ClerkProvider } from "@clerk/clerk-react";
 import "./index.css";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import i18n from "./i18n";
 
 const queryClient = new QueryClient();
 

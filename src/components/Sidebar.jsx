@@ -48,7 +48,7 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
           to="/dashboard"
         >
           <MdOutlineSpaceDashboard size={22} />
-          Dashboard
+          {t("dashboard")}
         </NavLink>
       </div>
       <button
