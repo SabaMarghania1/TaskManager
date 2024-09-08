@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: ["class"],
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
@@ -7,7 +8,7 @@ export default {
         sans: ["Inter", "Helvetica", "Arial", "sans-serif"],
       },
       container: {
-        center: true,
+        center: "true",
         padding: {
           DEFAULT: "16px",
           sm: "2rem",
@@ -21,7 +22,12 @@ export default {
       boxShadow: {
         custom: "0px 1px 8px 0px rgba(0, 0, 0, 0.25)",
       },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
+      },
     },
   },
-  plugins: [],
+  plugins: [require("tailwindcss-animate")],
 };

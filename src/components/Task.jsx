@@ -1,7 +1,8 @@
+import { useEffect, useRef, useState } from "react";
 import { format } from "date-fns";
 import TaskModal from "./TaskModal";
-import { useEffect, useRef, useState } from "react";
 import { useTodoMutations } from "../hooks/useTodoMutation";
+
 const Task = ({
   task,
   isOpen,
@@ -11,7 +12,6 @@ const Task = ({
 }) => {
   const [isEdit, setIsEdit] = useState(false);
   const [description, setDescription] = useState(task.description);
-
   const { updateTodoMutation } = useTodoMutations();
 
   const textareaRef = useRef(null);
@@ -62,7 +62,7 @@ const Task = ({
 
   return (
     <div
-      className="break-inside-avoid relative border rounded-lg px-4 pb-16 pt-[58px] text-sm shadow-lg mb-4 max-w-[253px]"
+      className="break-inside-avoid relative border rounded-lg px-4 pb-4 pt-[58px] text-sm shadow-lg mb-4 max-w-[253px]"
       style={{ backgroundColor: appliedBgColor }}
     >
       {formattedDate && (
@@ -92,12 +92,9 @@ const Task = ({
 
       {task.complate && <p className="text-green-500">Complete</p>}
       {!isEdit && (
-        <div className="absolute top-4 right-2 xl:top-[85%]">
-          <img src="/more.svg" alt="More options" onClick={toggleOpen} />
+        <div className="flex justify-end ">
+          <TaskModal taskId={task.id} task={task} />
         </div>
-      )}
-      {isOpen && (
-        <TaskModal task={task} handleEdit={handleEdit} onClose={toggleOpen} />
       )}
     </div>
   );

@@ -1,16 +1,35 @@
-import React, { useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
 import { CiStar, CiEdit } from "react-icons/ci";
 import { FaRegCircle } from "react-icons/fa";
 import { AiOutlineDelete } from "react-icons/ai";
-import { useTodoMutations } from "../hooks/useTodoMutation";
+import { useTodoMutations } from "@/hooks/useTodoMutation";
+import { useTranslation } from "react-i18next";
 
-const TaskModal = ({ task, onClose, handleEdit }) => {
-  const {
-    completeTodoMutation,
-    deleteTodoMutation,
-    updateTodoMutation,
-    toggleImportantMutation,
-  } = useTodoMutations();
+export function TaskModal({ task }) {
+  const { t } = useTranslation();
+  const { completeTodoMutation, deleteTodoMutation, toggleImportantMutation } =
+    useTodoMutations();
+
+  const [isMobile, setIsMobile] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const handleComplete = () => {
     completeTodoMutation.mutate({ id: task.id });
@@ -24,40 +43,48 @@ const TaskModal = ({ task, onClose, handleEdit }) => {
     toggleImportantMutation.mutate({ id: task.id, important: task.important });
   };
 
+  const handleClick = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
-    <div className="absolute right-0 inset-0 bottom-0 lg:bottom-auto z-50">
-      <div className="px-4 py-2 bg-white lg:w-[200px] w-[160px] rounded-lg shadow-custom">
-        <div className="flex gap-3 py-[10px]" onClick={handleToggleImportant}>
+    <HoverCard open={isMobile ? isOpen : undefined} onOpenChange={setIsOpen}>
+      <HoverCardTrigger asChild>
+        <img
+          className="cursor-pointer"
+          src="/more.svg"
+          alt="more"
+          onClick={isMobile ? handleClick : undefined}
+        />
+      </HoverCardTrigger>
+      <HoverCardContent className="w-[160px] sm:w-[200px] rounded-lg shadow-custom z-50 bg-white">
+        <div
+          className="flex gap-3 py-2 cursor-pointer"
+          onClick={handleToggleImportant}
+        >
           <CiStar size={22} />
-          Importance
+          {t("Importance")}
         </div>
-        <div
-          className={`flex gap-3 py-[10px] ${task.complate && "hidden"}`}
-          onClick={handleComplete}
-        >
-          <FaRegCircle size={22} />
-          Complete
-        </div>
-        <div
-          className={`flex gap-3 py-[10px] ${task.complate && "hidden"}`}
-          onClick={handleEdit}
-        >
+        {!task.complate && (
+          <div
+            className="flex gap-3 py-2 cursor-pointer"
+            onClick={handleComplete}
+          >
+            <FaRegCircle size={22} />
+            {t("Complete")}
+          </div>
+        )}
+        <div className="flex gap-3 py-2 cursor-pointer">
           <CiEdit size={22} />
-          Edit
+          {t("Edit")}
         </div>
-        <div className="flex gap-3 py-[10px]" onClick={handleDelete}>
+        <div className="flex gap-3 py-2 cursor-pointer" onClick={handleDelete}>
           <AiOutlineDelete size={22} />
-          Delete
+          {t("Delete")}
         </div>
-        <button
-          onClick={onClose}
-          className="mt-2 bg-blue-500 text-white rounded  px-3 py-1"
-        >
-          Close
-        </button>
-      </div>
-    </div>
+      </HoverCardContent>
+    </HoverCard>
   );
-};
+}
 
 export default TaskModal;
