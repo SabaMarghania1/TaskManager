@@ -1,14 +1,11 @@
 import React from "react";
 import { SignIn } from "@clerk/clerk-react";
-import { useNavigate } from "react-router-dom";
 
 const SignInForm = () => {
   return (
     <div>
       <SignIn
-        path="/login"
         signUpUrl="/register"
-        routing="path"
         appearance={{
           elements: {
             main: "flex flex-col-reverse",

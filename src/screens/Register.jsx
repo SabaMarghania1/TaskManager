@@ -5,7 +5,6 @@ const Register = () => {
   return (
     <div>
       <SignUp
-        path="/register"
         signInUrl="/login"
         appearance={{
           elements: {
