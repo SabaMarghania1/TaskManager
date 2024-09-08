@@ -6,6 +6,7 @@ import Header from "./Header";
 const AppLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [openTaskId, setOpenTaskId] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const toggleOpen = (taskId) => {
     setOpenTaskId((prevId) => (prevId === taskId ? null : taskId));
@@ -19,9 +20,20 @@ const AppLayout = () => {
     <div className="grid grid-cols-1  grid-rows-[60px_1fr] md:grid-cols-[300px_auto] lg:grid-rows-[68px 1fr]  h-screen mb-10">
       <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
 
-      <Header toggleSidebar={toggleSidebar} />
+      <Header
+        toggleSidebar={toggleSidebar}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+      />
 
-      <Outlet context={{ openTaskId, toggleOpen }} />
+      <Outlet
+        context={{
+          openTaskId,
+          toggleOpen,
+          searchTerm,
+          setSearchTerm,
+        }}
+      />
     </div>
   );
 };
