@@ -72,7 +72,11 @@ const Dashboard = () => {
             })}
           </DashboardItems>
 
-          <PieChart chartData={chartData} isPending={isPending} />
+          {todos.length === 0 ? (
+            <h1>To See Chart, Simply add todos.</h1>
+          ) : (
+            <PieChart chartData={chartData} isPending={isPending} />
+          )}
         </div>
       )}
     </div>
