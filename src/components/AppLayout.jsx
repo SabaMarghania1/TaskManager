@@ -2,11 +2,14 @@ import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
+import { useFetchTodos } from "../hooks/useFetchTodos";
 
 const AppLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [openTaskId, setOpenTaskId] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
+
+  const { data: todos, isPending, isError } = useFetchTodos();
 
   const toggleOpen = (taskId) => {
     setOpenTaskId((prevId) => (prevId === taskId ? null : taskId));
@@ -32,6 +35,9 @@ const AppLayout = () => {
           toggleOpen,
           searchTerm,
           setSearchTerm,
+          todos,
+          isPending,
+          isError,
         }}
       />
     </div>

@@ -1,17 +1,41 @@
 import { useFetchTodos } from "../hooks/useFetchTodos";
 import PieChart from "../components/PieChart";
 import Loader from "../components/Loader";
+import { useOutletContext } from "react-router-dom";
+import DashboardItems from "../components/DashboardItems";
+import DashboardItem from "../components/DashboardItem";
 
 const Dashboard = () => {
-  const { data: todos, isPending, isError } = useFetchTodos();
+  const { todos, isPending, isError } = useOutletContext();
+
+  const todosData = todos
+    ? [
+        {
+          name: "All Todos",
+          value: todos.length,
+        },
+        {
+          name: "Important Tasks",
+          value: todos.filter((task) => task.important).length,
+        },
+        {
+          name: "Completed Tasks",
+          value: todos.filter((task) => task.complete).length,
+        },
+        {
+          name: "Remaining Tasks",
+          value: todos.length - todos.filter((task) => task.complete).length,
+        },
+      ]
+    : [];
 
   const chartData = todos
     ? {
         labels: [
-          "Your Activities",
+          "All Todos",
           "Important Tasks",
           "Done Tasks",
-          "Left Todos",
+          "Remaining Tasks",
         ],
         datasets: [
           {
@@ -32,11 +56,24 @@ const Dashboard = () => {
 
   return (
     <div className="flex flex-col gap-14 px-4 lg:px-8 col-start-1 md:col-start-2 row-start-2 mt-8">
-      <h1>Task Dashboard</h1>
       {isPending ? (
         <Loader />
       ) : (
-        <PieChart chartData={chartData} isPending={isPending} />
+        <div className="flex flex-col">
+          <DashboardItems>
+            {todosData.map((item) => {
+              return (
+                <DashboardItem
+                  key={item.text}
+                  text={item.name}
+                  quantity={item.value}
+                />
+              );
+            })}
+          </DashboardItems>
+
+          <PieChart chartData={chartData} isPending={isPending} />
+        </div>
       )}
     </div>
   );

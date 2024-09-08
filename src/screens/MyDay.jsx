@@ -7,13 +7,11 @@ import Loader from "../components/Loader";
 import { useOutletContext } from "react-router-dom";
 
 const MyDay = () => {
-  const { openTaskId, toggleOpen, searchTerm } = useOutletContext();
-  const { user, isLoaded } = useUser();
-
-  const { data: todos, isPending, error } = useFetchTodos(user.id, isLoaded);
+  const { openTaskId, toggleOpen, searchTerm, todos, isPending, isError } =
+    useOutletContext();
 
   if (isPending) return <Loader />;
-  if (error) return <p>Error fetching todos: {error.message}</p>;
+  if (isError) return <p>Error fetching todos, try again later</p>;
 
   const formattedTodos = searchTerm
     ? todos
