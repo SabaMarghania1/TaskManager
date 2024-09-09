@@ -10,7 +10,7 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { useTodoMutations } from "@/hooks/useTodoMutation";
 import { useTranslation } from "react-i18next";
 
-export function TaskModal({ task }) {
+export function TaskModal({ task, handleEdit }) {
   const { t } = useTranslation();
   const { completeTodoMutation, deleteTodoMutation, toggleImportantMutation } =
     useTodoMutations();
@@ -63,7 +63,7 @@ export function TaskModal({ task }) {
           onClick={handleToggleImportant}
         >
           <CiStar size={22} />
-          {t("Importance")}
+          {t("importance")}
         </div>
         {!task.complate && (
           <div
@@ -71,16 +71,16 @@ export function TaskModal({ task }) {
             onClick={handleComplete}
           >
             <FaRegCircle size={22} />
-            {t("Complete")}
+            {t("complete")}
           </div>
         )}
-        <div className="flex gap-3 py-2 cursor-pointer">
+        <div className="flex gap-3 py-2 cursor-pointer" onClick={handleEdit}>
           <CiEdit size={22} />
-          {t("Edit")}
+          {t("edit")}
         </div>
         <div className="flex gap-3 py-2 cursor-pointer" onClick={handleDelete}>
           <AiOutlineDelete size={22} />
-          {t("Delete")}
+          {t("delete")}
         </div>
       </HoverCardContent>
     </HoverCard>

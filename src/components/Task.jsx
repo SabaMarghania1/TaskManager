@@ -33,16 +33,6 @@ const Task = ({
     adjustTextareaHeight();
   }, []);
 
-  const handleEdit = () => {
-    setIsEdit(true);
-    toggleOpen();
-  };
-
-  const handleSaveEdit = () => {
-    updateTodoMutation.mutate({ id: task.id, newDescription: description });
-    setIsEdit(false);
-  };
-
   const formattedDate = format(new Date(task.created_at), "MM/dd/yyyy");
 
   const bgColors = [
@@ -53,6 +43,16 @@ const Task = ({
     "#E7E4FC",
     "#FCE4F5",
   ];
+
+  const handleEdit = () => {
+    setIsEdit(true);
+    toggleOpen();
+  };
+
+  const handleSaveEdit = () => {
+    updateTodoMutation.mutate({ id: task.id, newDescription: description });
+    setIsEdit(false);
+  };
 
   const [appliedBgColor] = useState(() => {
     return randomBg
@@ -93,7 +93,7 @@ const Task = ({
       {task.complate && <p className="text-green-500">Complete</p>}
       {!isEdit && (
         <div className="flex justify-end ">
-          <TaskModal taskId={task.id} task={task} />
+          <TaskModal handleEdit={handleEdit} taskId={task.id} task={task} />
         </div>
       )}
     </div>

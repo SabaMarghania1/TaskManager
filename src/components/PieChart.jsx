@@ -2,9 +2,13 @@ import { Chart, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "react-chartjs-2";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 
+import { useTranslation } from "react-i18next";
+
 Chart.register(ArcElement, Tooltip, Legend, ChartDataLabels);
 
 const PieChart = ({ chartData, isPending }) => {
+  const { t } = useTranslation();
+
   const options = {
     plugins: {
       datalabels: {
@@ -46,14 +50,10 @@ const PieChart = ({ chartData, isPending }) => {
     return <p>Loading chart...</p>;
   }
 
-  if (!chartData || !chartData.labels || chartData.labels.length === 0) {
-    return <p>No data available to render chart.</p>;
-  }
-
   return (
     <div className="w-full bg-[#FFF] border border-[#E7E8EA] rounded-[8px]">
       <div className="w-full p-[1rem] border-b border-b:#D7D9DD flex ">
-        <span className="text-[20px] text-start">Task by Status</span>
+        <span className="text-[20px] text-start">{t("taskByStatus")}</span>
       </div>
 
       <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-24 p-4">

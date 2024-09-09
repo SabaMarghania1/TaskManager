@@ -31,15 +31,14 @@ export default function Header({ toggleSidebar, searchTerm, setSearchTerm }) {
             placeholder={t("searchTask")}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="border-[1px] border-[#82868F] px-3 py-2 rounded-md w-full h-full"
+            className=" bg-[#E7E8EA] px-3 py-2 rounded-md w-full h-full"
           />
         </div>
       )}
 
       <div className="flex gap-3 items-center md:hidden absolute right-4 z-10">
-        <div className="flex items-center gap-2">
-          <span className="text-[#82868F]">EN</span>
-          <div className="w-[1px] h-4 bg-[#82868F]"></div>
+        <div className="flex items-end gap-2">
+          <LanguageSelector />
         </div>
 
         <img

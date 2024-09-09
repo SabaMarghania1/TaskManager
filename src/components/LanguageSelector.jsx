@@ -7,6 +7,7 @@ const LanguageSwitcher = () => {
   const [isSwapping, setIsSwapping] = useState(false);
 
   const swapLanguage = () => {
+    console.log("Button clicked"); // Debugging to check if the function is triggered
     setIsSwapping(true);
     setTimeout(() => {
       const newLang = language === "en" ? "ka" : "en";
@@ -19,7 +20,8 @@ const LanguageSwitcher = () => {
   return (
     <button
       onClick={swapLanguage}
-      className="relative flex justify-center items-center h-10 w-20 overflow-hidden text-gray-800 hover:text-black transition-colors duration-300"
+      onTouchStart={swapLanguage}
+      className="relative z-50 flex justify-center items-center h-10 w-20 overflow-hidden text-gray-800 hover:text-black transition-colors duration-300"
     >
       <span
         className={`absolute transition-transform duration-300 ${
@@ -33,7 +35,7 @@ const LanguageSwitcher = () => {
         className={`absolute transition-transform duration-300 ${
           isSwapping ? "translate-y-0" : "translate-y-full"
         }`}
-        style={{ visibility: isSwapping ? "visible" : "hidden" }}
+        style={{ opacity: isSwapping ? 1 : 0 }}
       >
         {language === "en" ? "KA" : "EN"}
       </span>

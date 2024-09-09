@@ -20,6 +20,13 @@ i18n
           importantTasks: "Important Tasks",
           finishedTasks: "Completed Tasks",
           remainingTasks: "Remaining Tasks",
+          taskByStatus: "Task By Status",
+
+          // Modal
+          importance: "Importance",
+          complete: "Complete",
+          edit: "Edit",
+          delete: "Delete",
         },
       },
       ka: {
@@ -33,6 +40,13 @@ i18n
           importantTasks: "მნიშვნელოვანი დავალებები",
           finishedTasks: "დასრულებული დავალებები",
           remainingTasks: "დარჩენილი დავალებები",
+          taskByStatus: "დავალებების სტატუსი",
+
+          // Modal
+          importance: "მნიშვნელოვნებში",
+          complete: "შესრულება",
+          edit: "განახლება",
+          delete: "წაშლა",
         },
       },
     },

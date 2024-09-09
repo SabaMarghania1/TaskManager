@@ -35,13 +35,12 @@ const Dashboard = () => {
         labels: [t("importantTasks"), t("finishedTasks"), t("remainingTasks")],
         datasets: [
           {
-            label: t("dashboard"),
             data: [
               todos.filter((task) => task.important).length,
               todos.filter((task) => task.complate).length,
               todos.length - todos.filter((task) => task.complate).length,
             ],
-            backgroundColor: ["#FFA400", "#80BC00", "#6E7C7C"],
+            backgroundColor: ["#3A8DDE", "#80BC00", "#FFA400"],
           },
         ],
       }

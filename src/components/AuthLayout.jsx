@@ -16,7 +16,7 @@ const AuthLayout = () => {
     >
       {isDesktop && <Pattern />}
 
-      <div className={`w-full max-w-[400px]`}>
+      <div className={`w-full flex justify-center items-center`}>
         <Outlet />
       </div>
     </div>
